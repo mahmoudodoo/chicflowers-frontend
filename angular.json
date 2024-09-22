@@ -29,7 +29,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "https://mahmoudodoo.github.io/chicflowers-frontend/"
           },
           "configurations": {
             "production": {
