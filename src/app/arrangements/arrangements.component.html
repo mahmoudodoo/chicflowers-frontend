@@ -1,0 +1,47 @@
+<div *ngFor="let arrangement of arrangements" class="arrangement-card" (click)="openModal(arrangement)">
+    <img [src]="arrangement.image_filename" [alt]="arrangement.name" (error)="onImageError($event)">
+    
+    <!-- Name with hover -->
+    <div class="name-container" (mouseenter)="onHoverName(arrangement.id)" (mouseleave)="onLeaveHover()">
+      <h2>{{ arrangement.name | slice: 0:20 }}...</h2>
+      <div class="hover-box" *ngIf="hoveredName === arrangement.id">
+        <p>{{ arrangement.name }}</p>
+      </div>
+    </div>
+
+    <p><strong>Type:</strong> {{ arrangement.type_name }}</p>
+
+    <!-- Description with hover -->
+    <div class="description-container" (mouseenter)="onHoverDescription(arrangement.id)" (mouseleave)="onLeaveHover()">
+      <p class="description-text"><strong>Description:</strong> {{ arrangement.description | slice: 0:30 }}...</p>
+      <div class="hover-box" *ngIf="hoveredDescription === arrangement.id">
+        <p>{{ arrangement.description }}</p>
+      </div>
+    </div>
+
+    <!-- Ingredients with hover -->
+    <div class="ingredients-container" (mouseenter)="onHoverIngredients(arrangement.id)" (mouseleave)="onLeaveHover()">
+      <p class="ingredients-text"><strong>Ingredients:</strong> 
+        <span *ngFor="let ingredient of arrangement.ingredients; let i = index">
+          {{ ingredient.name }} ({{ ingredient.quantity }})<span *ngIf="i < arrangement.ingredients.length - 1">, </span>
+        </span>
+      </p>
+      <div class="hover-box" *ngIf="hoveredIngredients === arrangement.id">
+        <ul>
+          <li *ngFor="let ingredient of arrangement.ingredients">
+            {{ ingredient.name }} (Quantity: {{ ingredient.quantity }})
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>Base Price:</strong> ${{ arrangement.price | number:'1.3-3' }}</p>
+    <p><strong>Total Price:</strong> ${{ arrangement.total_price | number:'1.3-3' }}</p>
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination">
+    <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">Next</button>
+  </div>

@@ -1,0 +1,40 @@
+/* Gallery View */
+.gallery-view .flower-card {
+    display: block;
+}
+
+.gallery-view .flower-card .card {
+    cursor: pointer;
+    width: 100%;
+}
+
+/* List View */
+.list-view .flower-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.list-view .flower-card .card {
+    flex-direction: row;
+    width: 100%;
+}
+
+.list-view .flower-card .card-img-top {
+    width: 150px;
+    height: auto;
+}
+
+.list-view .flower-card .card-body {
+    flex: 1;
+}
+
+/* Ensure only one card per row in list view */
+.list-view .flower-card {
+    margin-bottom: 1rem;
+}
+
+.list-view .flower-card .card {
+    width: 100%; /* Ensures card takes up full width */
+}

@@ -1,0 +1,126 @@
+.arrangement-card {
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
+    width: 350px;
+    max-width: 100%;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    vertical-align: top;
+    min-height: 450px;
+    position: relative;
+}
+
+.arrangement-card img {
+    max-width: 100%;
+    border-radius: 15px 15px 0 0;
+    transition: transform 0.3s ease;
+    height: 200px;
+    object-fit: cover;
+}
+
+.arrangement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.arrangement-card h2,
+.arrangement-card p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Hover effect for Name */
+.name-container {
+    position: relative;
+}
+
+.name-container .hover-box,
+.description-container .hover-box,
+.ingredients-container .hover-box {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 10px;
+    position: absolute;
+    z-index: 100;
+    width: 300px;
+    border-radius: 8px;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    white-space: normal; /* Allow multiline content */
+    text-align: left; /* Align text to the left */
+}
+
+.name-container:hover .hover-box,
+.description-container:hover .hover-box,
+.ingredients-container:hover .hover-box {
+    display: block;
+}
+
+.hover-box::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.description-container,
+.ingredients-container {
+    position: relative;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the items vertically */
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .arrangement-card {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (max-width: 576px) {
+    .arrangement-card {
+        width: calc(100% - 40px);
+    }
+}
+
+

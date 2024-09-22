@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit Arrangement</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <form (ngSubmit)="saveArrangement()">
+    <!-- Arrangement Name -->
+    <div class="form-group mb-3">
+      <label for="name">Arrangement Name</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="arrangement.name" name="name">
+    </div>
+
+    <!-- Arrangement Type -->
+    <div class="form-group mb-3">
+      <label for="type">Type</label>
+      <select id="type" class="form-select" [(ngModel)]="selectedType" name="type">
+        <option *ngFor="let type of typeChoices" [value]="type.id">{{ type.type_name }}</option>
+      </select>
+    </div>
+
+    <!-- Arrangement Color -->
+    <div class="form-group mb-3">
+      <label for="color">Color</label>
+      <select id="color" class="form-select" [(ngModel)]="selectedColor" name="color">
+        <option *ngFor="let color of colorChoices" [value]="color.id">{{ color.color_name }}</option>
+      </select>
+    </div>
+
+    <!-- Wedding Style -->
+    <div class="form-group mb-3">
+      <label for="wedding_style">Wedding Style</label>
+      <select id="wedding_style" class="form-select" [(ngModel)]="selectedWeddingStyle" name="wedding_style">
+        <option *ngFor="let style of weddingStyleChoices" [value]="style.id">{{ style.style_name }}</option>
+      </select>
+    </div>
+
+    <!-- Shareable Checkbox -->
+    <div class="form-group mb-3">
+      <input type="checkbox" id="isShareable" [(ngModel)]="isShareable" name="isShareable" />
+      <label for="isShareable">Is Shareable</label>
+    </div>
+
+
+    <!-- Arrangement Image -->
+    <div class="form-group mb-3">
+      <label for="image">Arrangement Image</label>
+      <div class="image-preview mb-2">
+        <img [src]="imagePreview" alt="Arrangement Image" class="img-fluid" />
+      </div>
+      <input type="file" id="image" class="form-control" (change)="onImageChange($event)">
+    </div>
+
+    <!-- Ingredients -->
+    <div class="form-group mb-3">
+      <label for="ingredients">Ingredients</label>
+      <div class="tags">
+        <span *ngFor="let ingredient of newIngredients; let i = index" class="badge bg-primary">
+          {{ ingredient.name }} ({{ ingredient.quantity }})
+          <span class="remove-tag" (click)="removeIngredient(i)">x</span>
+        </span>
+      </div>
+      <div class="d-flex">
+        <select class="form-select me-2" [(ngModel)]="selectedIngredient" name="selectedIngredient">
+          <option *ngFor="let choice of ingredientChoices" [ngValue]="choice">{{ choice.name }}</option>
+        </select>
+      
+        <input type="number" class="form-control" [(ngModel)]="selectedQuantity" name="quantity" min="1">
+        <button type="button" class="btn btn-primary ms-2" (click)="addIngredient()">Add</button>
+      </div>
+    </div>
+
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+      <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+    </div>
+  </form>
+</div>

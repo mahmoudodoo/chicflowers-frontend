@@ -1,0 +1,82 @@
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Flowers</h1>
+  
+    <div class="row mb-4">
+      <div class="col-md-6 text-center mb-3 mb-md-0">
+        <button type="button" class="btn btn-wedding btn-lg" (click)="openAddFlowerModal()">Add Flower</button>
+      </div>
+  
+      <div class="col-md-6 text-center">
+        <button *ngIf="!listView" class="btn btn-secondary" (click)="switchToListView()">List View</button>
+        <button *ngIf="listView" class="btn btn-secondary" (click)="switchToGalleryView()">Gallery View</button>
+      </div>
+    </div>
+  
+    <div class="row" [ngClass]="listView ? 'list-view' : 'gallery-view'">
+      <div *ngFor="let flower of flowers" class="flower-card">
+        <div class="card">
+          <!-- Use imageUrl to point to the Flask server -->
+          <img [src]="flower.imageUrl" class="card-img-top" [alt]="flower.name">
+          <div class="card-body">
+            <h5 class="card-title">{{ flower.name }}</h5>
+            <p class="card-text"><strong>Color:</strong> {{ flower.color }}</p>
+            <p class="card-text"><strong>Stems per bunch:</strong> {{ flower.stems_per_bunch }}</p>
+            <p class="card-text"><strong>Cost per stem:</strong> ${{ flower.cost_per_stem }}</p>
+            <p class="card-text"><strong>Total Cost:</strong> ${{ flower.total_cost }}</p>
+            <p class="card-text"><strong>Supplier:</strong> {{ flower.supplier }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Add Flower Modal -->
+    <div *ngIf="showModal" class="modal fade show d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Flower</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="addFlowerForm" (ngSubmit)="submitFlower()">
+              <div class="form-group">
+                <label for="name">Flower Name</label>
+                <input type="text" formControlName="name" class="form-control" id="name" required>
+              </div>
+              <div class="form-group">
+                <label for="color">Flower Color</label>
+                <input type="text" formControlName="color" class="form-control" id="color" required>
+              </div>
+              <div class="form-group">
+                <label for="stems_per_bunch">Stems per Bunch</label>
+                <input type="number" formControlName="stems_per_bunch" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="cost_per_stem">Cost per Stem</label>
+                <input type="number" formControlName="cost_per_stem" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="total_cost">Total Cost</label>
+                <input type="number" formControlName="total_cost" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="supplier">Supplier (optional)</label>
+                <input type="text" formControlName="supplier" class="form-control" id="supplier">
+              </div>
+              <div class="form-group">
+                <label for="image">Flower Image</label>
+                <input type="file" formControlName="image" class="form-control-file" id="image">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+                <button type="submit" class="btn btn-primary">Add Flower</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
